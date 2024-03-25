@@ -1,0 +1,208 @@
+{
+  "music_moon": {
+    "subtitle": "subtitles.merrymusic.hesperyd",
+    "sounds": [
+      {
+        "name": "merrymusic:nostalgia",
+        "stream": true
+      }
+    ]
+  },
+  "music_day": {
+    "subtitle": "subtitles.merrymusic.xh",
+    "sounds": [
+      {
+        "name": "merrymusic:newday",
+        "stream": true
+      },
+      {
+        "name": "merrymusic:breathein",
+        "stream": true
+      }
+    ]
+  },
+  "music_night": {
+    "subtitle": "subtitles.merrymusic.xh",
+    "sounds": [
+      {
+        "name": "merrymusic:moonlight",
+        "stream": true
+      }
+    ]
+  },
+	"music_ow_day": {
+      "subtitle": "subtitles.merrymusic.xh",
+    "sounds": [
+      {
+        "name": "merrymusic:day",
+        "stream": true,
+        "weight": 3
+      },
+			{
+        "name": "music/game/calm1",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal2",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal3",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal4",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/piano2",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/piano3",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+	"music_ow_night": {
+    "sounds": [
+      {
+        "name": "merrymusic:night",
+        "stream": true,
+        "weight": 2
+      },
+			{
+        "name": "music/game/calm2",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/calm3",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/hal1",
+        "stream": true,
+        "weight": 1
+      },
+			{
+        "name": "music/game/piano1",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+	"music_ow_scary": {
+    "sounds": [
+      {
+        "name": "merrymusic:cave",
+        "stream": true,
+        "weight": 2
+      },
+      {
+        "name": "music/game/nuance1",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/soulsand_valley/so_below",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_ow_cave": {
+    "sounds": [
+      {
+        "name": "music/game/nuance2",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/nether3",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/nether/nether4",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_end": {
+    "sounds": [
+      {
+        "name": "music/game/end/end",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  },
+  "music_end_boss": {
+    "subtitle": "subtitles.merrymusic.hesperyd",
+    "sounds": [
+      {
+        "name": "merrymusic:astralsend",
+        "stream": true
+      }
+    ]
+  },
+  "music_wither": {
+    "sounds": [
+      {
+        "name": "merrymusic:wither",
+        "stream": true
+      }
+    ]
+  },
+	"music_wither_phase2": {
+    "sounds": [
+      {
+        "name": "merrymusic:witherphase2",
+        "stream": true
+      }
+    ]
+  },
+	"music_wither_spawn": {
+    "subtitle": "subtitles.merrymusic.hesperyd",
+    "sounds": [
+      {
+        "name": "merrymusic:witherspawn",
+        "stream": true
+      }
+    ]
+  },
+	"music_wither_death": {
+    "sounds": [
+      {
+        "name": "merrymusic:stance",
+        "stream": true
+      }
+    ]
+  },
+	"music_combat": {
+    "subtitle": "subtitles.merrymusic.hesperyd",
+    "sounds": [
+      {
+        "name": "merrymusic:tensionrising",
+        "stream": true
+      }
+    ]
+  },
+	"music_combat_end": {
+    "sounds": [
+      {
+        "name": "merrymusic:andbreathe",
+        "stream": true
+      }
+    ]
+  }
+}

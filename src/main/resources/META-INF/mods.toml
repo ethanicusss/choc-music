@@ -27,9 +27,9 @@ displayName="Merry Music" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="merrymusic.png" #optional
+logoFile="icon.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks for this example mod goes to Java" #optional
+credits="Music packaged is by Hesperyd XETROO, and myself" #optional
 # A text field displayed in the mod UI
 authors="ethanicuss" #optional
 # Display Test controls the display for your mod in the server connection screen
@@ -68,3 +68,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
     versionRange="[1.19.2,1.20)"
     ordering="NONE"
     side="BOTH"
+
+[[mixins]]
+config="mixins.merrymusic.json"
