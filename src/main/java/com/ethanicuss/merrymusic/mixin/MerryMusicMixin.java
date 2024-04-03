@@ -36,8 +36,6 @@ public class MerryMusicMixin {
 
     @Inject(method = "getSituationalMusic", at = @At("HEAD"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void getSituationalMusic(CallbackInfoReturnable<Music> cir){
-        Music val = ModMusic.DAY;//default value, dw about this
-
         cir.setReturnValue(MusicPlayer.findMusic(musicManager));//Find music from the MusicPlayer class and send it back to the minecraft client
     }
 }

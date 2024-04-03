@@ -42,8 +42,17 @@ public class MusicPlayer {
         LocalPlayer player = Minecraft.getInstance().player;
 
         if (player != null) {//Check that we're actually in a game. If not, we're in the main menu.
-
-            if (Objects.equals(player.level.dimension().location().getNamespace(), "minecraft:overworld")){//If the dimension is "minecraft:overworld"...
+            String dimension = player.level.dimension().location().toString();//get player's dimension as "modid:dimension" e.g "minecraft:overworld"
+            String biome = "";
+            {//Run some code to get the player's biome as "modid:biome" e.g "minecraft:forest"
+                String rawBiome = player.level.getBiome(player.blockPosition()).toString().replace("Reference{ResourceKey[minecraft:worldgen/biome / ", "");
+                int biomeChar = 0;
+                while (rawBiome.charAt(biomeChar) != ']' && biomeChar < rawBiome.length()) {
+                    biome = biome.concat(String.valueOf(rawBiome.charAt(biomeChar)));
+                    biomeChar++;
+                }
+            }
+            if (Objects.equals(dimension, "minecraft:overworld")){//If the dimension is "minecraft:overworld"...
                 if (player.level.getDayTime()%24000 < 12000) {//...and the current time is <12000...
                     val = ModMusic.OW_DAY;//...It's the daytime! So play some daytime music...
                 }
@@ -56,9 +65,13 @@ public class MusicPlayer {
                 if (player.getY() < 30 && player.level.getLightEmission(player.blockPosition()) == 0){//But if it's less than 30 and the player is in absolute darkness...
                     val = ModMusic.OW_SCARY;//...play some scary cave music.
                 }//NOTE: these lower conditions will overwrite the val variable, so put the most generic conditions at the top.
+                if (biome.equals("minecraft:forest")){
+                    System.out.println("meow");
+                    val = ModMusic.OW_SCARY;
+                }
             }
 
-            if (!Objects.equals(player.level.dimension().location().getNamespace(), "minecraft:overworld") && !Objects.equals(player.level.dimension().location().getNamespace(), "minecraft:the_end")) {
+            if (!Objects.equals(dimension, "minecraft:overworld") && !Objects.equals(dimension, "minecraft:the_end")) {
                 if (player.level.getDayTime()%24000 < 12000) {//If not in the overworld or the end, play some generic space day/night music.
                     val = ModMusic.DAY;
                 }
@@ -66,12 +79,13 @@ public class MusicPlayer {
                     val = ModMusic.NIGHT;
                 }
             }
-
-            if (Objects.equals(player.level.dimension().location().getNamespace(), "ad_astra:moon") && player.getY() < 95) {//If on the moon and lower than Y=95...
-                val = ModMusic.MOON;
+            if (Objects.equals(dimension, "blue_skies:everbright") && player.getY() < 95) {//If on the moon and lower than Y=95...
+                if (Objects.equals(biome, "blue_skies:brisk_meadow")) {//doesn't work cus blue skies has its own music tracker
+                    val = ModMusic.MOON;
+                }
             }
 
-            if (Objects.equals(player.level.dimension().location().getNamespace(), "minecraft:the_end")) {
+            if (Objects.equals(dimension, "minecraft:the_end")) {
                 val = ModMusic.END;
                 if (Minecraft.getInstance().gui.getBossOverlay().shouldPlayMusic()) {//If Minecraft believes we should be playing end boss music, then play our boss music instead
                     val = ModMusic.END_BOSS;
