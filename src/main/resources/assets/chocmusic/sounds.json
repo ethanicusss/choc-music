@@ -1,40 +1,40 @@
 {
   "music_moon": {
-    "subtitle": "subtitles.merrymusic.hesperyd",
+    "subtitle": "subtitles.chocmusic.hesperyd",
     "sounds": [
       {
-        "name": "merrymusic:nostalgia",
+        "name": "chocmusic:nostalgia",
         "stream": true
       }
     ]
   },
   "music_day": {
-    "subtitle": "subtitles.merrymusic.xh",
+    "subtitle": "subtitles.chocmusic.xh",
     "sounds": [
       {
-        "name": "merrymusic:newday",
+        "name": "chocmusic:newday",
         "stream": true
       },
       {
-        "name": "merrymusic:breathein",
+        "name": "chocmusic:breathein",
         "stream": true
       }
     ]
   },
   "music_night": {
-    "subtitle": "subtitles.merrymusic.xh",
+    "subtitle": "subtitles.chocmusic.xh",
     "sounds": [
       {
-        "name": "merrymusic:moonlight",
+        "name": "chocmusic:moonlight",
         "stream": true
       }
     ]
   },
 	"music_ow_day": {
-      "subtitle": "subtitles.merrymusic.xh",
+      "subtitle": "subtitles.chocmusic.xh",
     "sounds": [
       {
-        "name": "merrymusic:day",
+        "name": "chocmusic:day",
         "stream": true,
         "weight": 3
       },
@@ -73,7 +73,7 @@
 	"music_ow_night": {
     "sounds": [
       {
-        "name": "merrymusic:night",
+        "name": "chocmusic:night",
         "stream": true,
         "weight": 2
       },
@@ -102,7 +102,7 @@
 	"music_ow_scary": {
     "sounds": [
       {
-        "name": "merrymusic:cave",
+        "name": "chocmusic:cave",
         "stream": true,
         "weight": 2
       },
@@ -147,10 +147,10 @@
     ]
   },
   "music_end_boss": {
-    "subtitle": "subtitles.merrymusic.hesperyd",
+    "subtitle": "subtitles.chocmusic.hesperyd",
     "sounds": [
       {
-        "name": "merrymusic:astralsend",
+        "name": "chocmusic:astralsend",
         "stream": true
       }
     ]
@@ -158,7 +158,7 @@
   "music_wither": {
     "sounds": [
       {
-        "name": "merrymusic:wither",
+        "name": "chocmusic:wither",
         "stream": true
       }
     ]
@@ -166,16 +166,16 @@
 	"music_wither_phase2": {
     "sounds": [
       {
-        "name": "merrymusic:witherphase2",
+        "name": "chocmusic:witherphase2",
         "stream": true
       }
     ]
   },
 	"music_wither_spawn": {
-    "subtitle": "subtitles.merrymusic.hesperyd",
+    "subtitle": "subtitles.chocmusic.hesperyd",
     "sounds": [
       {
-        "name": "merrymusic:witherspawn",
+        "name": "chocmusic:witherspawn",
         "stream": true
       }
     ]
@@ -183,16 +183,16 @@
 	"music_wither_death": {
     "sounds": [
       {
-        "name": "merrymusic:stance",
+        "name": "chocmusic:stance",
         "stream": true
       }
     ]
   },
 	"music_combat": {
-    "subtitle": "subtitles.merrymusic.hesperyd",
+    "subtitle": "subtitles.chocmusic.hesperyd",
     "sounds": [
       {
-        "name": "merrymusic:tensionrising",
+        "name": "chocmusic:tensionrising",
         "stream": true
       }
     ]
@@ -200,7 +200,7 @@
 	"music_combat_end": {
     "sounds": [
       {
-        "name": "merrymusic:andbreathe",
+        "name": "chocmusic:andbreathe",
         "stream": true
       }
     ]
