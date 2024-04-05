@@ -68,7 +68,7 @@ public class MusicPlayer {
                     val = ModMusic.OW_SCARY;//...play some scary cave music.
                 }//NOTE: these lower conditions will overwrite the val variable, so put the most generic conditions at the top.
                 if (biome.equals("minecraft:forest")){
-                    val = ModMusic.POST_MOON;
+                    val = ModMusic.MOON;
                 }
             }
 

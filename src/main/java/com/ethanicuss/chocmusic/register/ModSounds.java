@@ -17,7 +17,6 @@ public class ModSounds {
     }
     private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ChocMusic.MOD_ID);
     public static final RegistryObject<SoundEvent> MUSIC_MOON = register("music_moon");//music_moon references our sounds.json file "music_moon".
-    public static final RegistryObject<SoundEvent> MUSIC_POST_MOON = register("music_post_moon");
     public static final RegistryObject<SoundEvent> MUSIC_DAY = register("music_day");
     public static final RegistryObject<SoundEvent> MUSIC_OW_CAVE = register("music_ow_cave");
     public static final RegistryObject<SoundEvent> MUSIC_OW_SCARY = register("music_ow_scary");
