@@ -67,8 +67,8 @@ public class MusicPlayer {
                 if (player.getY() < 30 && player.level.getLightEmission(player.blockPosition()) == 0){//But if it's less than 30 and the player is in absolute darkness...
                     val = ModMusic.OW_SCARY;//...play some scary cave music.
                 }//NOTE: these lower conditions will overwrite the val variable, so put the most generic conditions at the top.
-                if (biome.equals("minecraft:forest")){
-                    val = ModMusic.POST_MOON;
+                if (biome.equals("minecraft:forest")){//If in biome "minecraft:forest"...
+                    val = ModMusic.MOON;
                 }
             }
 
@@ -93,7 +93,7 @@ public class MusicPlayer {
                 }
             }
 
-            if ((player.getHealth() < 12.0f || musicManager.isPlayingMusic(ModMusic.COMBAT)) && !isPlayingBossMusic(musicManager)) {//If the players health is less than 6 hearts or there is combat music playing AND boss music is not playing...
+            if ((player.getHealth() < 12.0f || musicManager.isPlayingMusic(ModMusic.COMBAT)) && !isPlayingBossMusic(musicManager)) {//If the player's health is less than 6 hearts or there is combat music playing AND boss music is not playing...
                 double i = player.getX();//Do a bunch of stuff do find out if there are 3 or more enemies in line of sight of the player in a 20x20x20 box from the player.
                 double j = player.getY();
                 double k = player.getZ();
