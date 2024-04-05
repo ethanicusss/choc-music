@@ -12,10 +12,11 @@ someone add a list of all the music and the artists here ty
  - Drop a new .ogg (preferably mono) into src/main/resources/assets/chocmusic/sounds
  - Edit the sounds.json in src/main/resources/assets/chocmusic with a new sound object like so:\
 "music_day" is a collection of music that can be configured to play under a condition. It will choose randomly from the "sounds" array.
-For boss music, only have one song in the "sounds" array.
+For boss music, only have one song in the "sounds" array.\
+Optionally, you can add a subtitle (reference to the lang file) that can be used to credit the artist. Remove this line if not wanted.
 ```json
 "music_day": {
-    "subtitle": "subtitles.chocmusic.xh",
+    "subtitle": "subtitles.chocmusic.credit_hesperyd",
     "sounds": [
         {
             "name": "chocmusic:newsong",
