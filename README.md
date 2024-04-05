@@ -10,7 +10,7 @@ someone add a list of all the music and the artists here ty
 ## Adding music
 
  - Drop a new .ogg (preferably mono) into src/main/resources/assets/chocmusic/sounds
- - Edit the sounds.json in src/main/resources/assets/chocmusic with a new sound object like so:
+ - Edit the sounds.json in src/main/resources/assets/chocmusic with a new sound object like so:\
 "music_day" is a collection of music that can be configured to play under a condition. It will choose randomly from the "sounds" array.
 There can be only one sound in the "sounds" array. Do this for boss music
 ```json
