@@ -24,6 +24,10 @@ public class MusicPlayer {
         return true;
     };
 
+    private static final int bossEscapeTimerMax = 200;
+    private static int bossEscapeTimer = bossEscapeTimerMax;
+
+
     private static final Music[] bossMusic = {
             ModMusic.END_BOSS,
             ModMusic.WITHER,
@@ -93,6 +97,8 @@ public class MusicPlayer {
                 }
             }
 
+
+
             if ((player.getHealth() < 12.0f || musicManager.isPlayingMusic(ModMusic.COMBAT)) && !isPlayingBossMusic(musicManager)) {//If the players health is less than 6 hearts or there is combat music playing AND boss music is not playing...
                 double i = player.getX();//Do a bunch of stuff do find out if there are 3 or more enemies in line of sight of the player in a 20x20x20 box from the player.
                 double j = player.getY();
@@ -131,7 +137,7 @@ public class MusicPlayer {
                 double i = player.getX();
                 double j = player.getY();
                 double k = player.getZ();
-                float f = 30.0f;
+                float f = 10.0f;
                 AABB box = new AABB((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
                 List<Monster> list = player.level.getEntities(EntityTypeTest.forClass(Monster.class), box, ENTITY_PREDICATE);
                 int bossCount = 0;
@@ -139,6 +145,7 @@ public class MusicPlayer {
                     switch (getMonsterName(e)) {//(none of these actually play since their music overrides this mod's music)
                         case "entity.mutantmore.mutant_wither_skeleton" -> { //entity name as string, so it works with any mod - like "entity.<mod_id>.<entity>"
                             bossCount++;
+                            bossEscapeTimer = bossEscapeTimerMax;
                             if (e.hasLineOfSight(player) && !e.isDeadOrDying()) {//play boss music when boss is in sight, and the boss isn't currently dying
                                 val = ModMusic.END_BOSS;
                             }
@@ -148,6 +155,7 @@ public class MusicPlayer {
                         }
                         case "entity.cataclysm.netherite_monstrosity" -> {
                             bossCount++;
+                            bossEscapeTimer = bossEscapeTimerMax;
                             if (e.hasLineOfSight(player) && !e.isDeadOrDying()) {
                                 val = ModMusic.END_BOSS;
                             }
@@ -155,8 +163,9 @@ public class MusicPlayer {
                                 val = ModMusic.WITHER_DEATH;
                             }
                         }
-                        case "entity.witherstormmod.wither_storm" -> {
+                        case "entity.minecraft.creeper" -> {
                             bossCount++;
+                            bossEscapeTimer = bossEscapeTimerMax;
                             if (e.hasLineOfSight(player) && !e.isDeadOrDying()) {
                                 val = ModMusic.WITHER_PHASE2;
                             }
@@ -167,7 +176,10 @@ public class MusicPlayer {
                     }
                 }
                 if (bossCount == 0 && isPlayingBossMusic(musicManager)) {//if there are no bosses but boss music is playing, play combat end sound. You could put some "escape succesful" music/sound here?
-                    val = ModMusic.COMBAT_END;
+                    bossEscapeTimer--;
+                    if (bossEscapeTimer <= 0) {
+                        val = ModMusic.COMBAT_END;
+                    }
                 }
             }
 
