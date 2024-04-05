@@ -1,7 +1,6 @@
 ## Choc Music
 
 Adds conditional custom music to Minecraft: Chocolate Edition to complement the many biomes, battles and bosses.\
-\
 
 # Conditional custom music
 
