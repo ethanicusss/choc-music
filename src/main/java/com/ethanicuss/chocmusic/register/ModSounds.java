@@ -1,6 +1,6 @@
-package com.ethanicuss.merrymusic.register;
+package com.ethanicuss.chocmusic.register;
 
-import com.ethanicuss.merrymusic.MerryMusic;
+import com.ethanicuss.chocmusic.ChocMusic;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
@@ -13,9 +13,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModSounds {
     private static RegistryObject<SoundEvent> register(String id) {
-        return SOUNDS.register(id, () -> new SoundEvent(new ResourceLocation(MerryMusic.MOD_ID, id)));
+        return SOUNDS.register(id, () -> new SoundEvent(new ResourceLocation(ChocMusic.MOD_ID, id)));
     }
-    private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MerryMusic.MOD_ID);
+    private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ChocMusic.MOD_ID);
     public static final RegistryObject<SoundEvent> MUSIC_MOON = register("music_moon");//music_moon references our sounds.json file "music_moon".
     public static final RegistryObject<SoundEvent> MUSIC_POST_MOON = register("music_post_moon");
     public static final RegistryObject<SoundEvent> MUSIC_DAY = register("music_day");

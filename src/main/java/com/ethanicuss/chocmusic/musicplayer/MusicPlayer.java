@@ -1,11 +1,12 @@
-package com.ethanicuss.merrymusic.musicplayer;
+package com.ethanicuss.chocmusic.musicplayer;
 
-import com.ethanicuss.merrymusic.register.ModMusic;
+import com.ethanicuss.chocmusic.register.ModMusic;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.Music;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.entity.EntityTypeTest;
@@ -19,9 +20,10 @@ public class MusicPlayer {
     private static final Predicate<WitherBoss> WITHER_PREDICATE = (entity) -> {//Predicate for finding a specific wither boss. If you wanted, you could get real detailed here and only return Wither bosses with a certain hp value or something.
         return true;
     };
-    private static final Predicate<Monster> ENEMY_PREDICATE = (entity) -> {//Same but for any hostile mob
+    private static final Predicate<LivingEntity> ENTITY_PREDICATE = (entity) -> {//Same but for any living entity
         return true;
     };
+
     private static final Music[] bossMusic = {
             ModMusic.END_BOSS,
             ModMusic.WITHER,
@@ -66,8 +68,7 @@ public class MusicPlayer {
                     val = ModMusic.OW_SCARY;//...play some scary cave music.
                 }//NOTE: these lower conditions will overwrite the val variable, so put the most generic conditions at the top.
                 if (biome.equals("minecraft:forest")){
-                    System.out.println("meow");
-                    val = ModMusic.OW_SCARY;
+                    val = ModMusic.POST_MOON;
                 }
             }
 
@@ -79,8 +80,8 @@ public class MusicPlayer {
                     val = ModMusic.NIGHT;
                 }
             }
-            if (Objects.equals(dimension, "blue_skies:everbright") && player.getY() < 95) {//If on the moon and lower than Y=95...
-                if (Objects.equals(biome, "blue_skies:brisk_meadow")) {//doesn't work cus blue skies has its own music tracker
+            if (Objects.equals(dimension, "minecraft:the_nether") && player.getY() < 95) {//If on the moon and lower than Y=95...
+                if (Objects.equals(biome, "infernalexp:glowstone_canyon")) {
                     val = ModMusic.MOON;
                 }
             }
@@ -98,7 +99,7 @@ public class MusicPlayer {
                 double k = player.getZ();
                 float f = 20.0f;
                 AABB box = new AABB((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
-                List<Monster> list = player.level.getEntities(EntityTypeTest.forClass(Monster.class), box, ENEMY_PREDICATE);
+                List<Monster> list = player.level.getEntities(EntityTypeTest.forClass(Monster.class), box, ENTITY_PREDICATE);
                 int enemySeeCount = 0;
                 int enemyCount = 0;
                 boolean enemyDied = false;
@@ -132,11 +133,11 @@ public class MusicPlayer {
                 double k = player.getZ();
                 float f = 30.0f;
                 AABB box = new AABB((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
-                List<Monster> list = player.level.getEntities(EntityTypeTest.forClass(Monster.class), box, ENEMY_PREDICATE);
+                List<Monster> list = player.level.getEntities(EntityTypeTest.forClass(Monster.class), box, ENTITY_PREDICATE);
                 int bossCount = 0;
                 for (Monster e : list) {
-                    switch (e.getName().toString().replace("translation{key='", "").replace("', args=[]}", "")) {//this is stupid but it works
-                        case "entity.mutantmonsters.mutant_zombie" -> { //entity name as string, so it works with any mod - like "entity.<mod_id>.<entity>"
+                    switch (getMonsterName(e)) {//(none of these actually play since their music overrides this mod's music)
+                        case "entity.mutantmore.mutant_wither_skeleton" -> { //entity name as string, so it works with any mod - like "entity.<mod_id>.<entity>"
                             bossCount++;
                             if (e.hasLineOfSight(player) && !e.isDeadOrDying()) {//play boss music when boss is in sight, and the boss isn't currently dying
                                 val = ModMusic.END_BOSS;
@@ -145,9 +146,27 @@ public class MusicPlayer {
                                 val = ModMusic.COMBAT_END;
                             }
                         }
+                        case "entity.cataclysm.netherite_monstrosity" -> {
+                            bossCount++;
+                            if (e.hasLineOfSight(player) && !e.isDeadOrDying()) {
+                                val = ModMusic.END_BOSS;
+                            }
+                            if (e.isDeadOrDying() && musicManager.isPlayingMusic(ModMusic.END_BOSS)) {
+                                val = ModMusic.WITHER_DEATH;
+                            }
+                        }
+                        case "entity.witherstormmod.wither_storm" -> {
+                            bossCount++;
+                            if (e.hasLineOfSight(player) && !e.isDeadOrDying()) {
+                                val = ModMusic.WITHER_PHASE2;
+                            }
+                            if (e.isDeadOrDying() && musicManager.isPlayingMusic(ModMusic.END_BOSS)) {
+                                val = ModMusic.WITHER_DEATH;
+                            }
+                        }
                     }
                 }
-                if (bossCount == 0 && isPlayingBossMusic(musicManager)) {//if there are no bosses but boss music is playing, play combat end sound
+                if (bossCount == 0 && isPlayingBossMusic(musicManager)) {//if there are no bosses but boss music is playing, play combat end sound. You could put some "escape succesful" music/sound here?
                     val = ModMusic.COMBAT_END;
                 }
             }
@@ -205,5 +224,39 @@ public class MusicPlayer {
         }
 
         return val;
+    }
+
+    private static String getMonsterName(LivingEntity e){
+        return e.getName().toString().replace("translation{key='", "").replace("', args=[]}", "");
+    }
+
+    public static boolean shouldPlayMusic(MusicManager musicManager){//Basically turn this mod off under certain circumstances to avoid music overlapping
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) {return true;}//If the player is null, we're in the menu, so play music
+
+        {//BOSS MUSIC
+            double i = player.getX();
+            double j = player.getY();
+            double k = player.getZ();
+            float f = 50.0f;//Radius of search in blocks
+            AABB box = new AABB((float) i - f, (float) j - f, (float) k - f, (float) (i + 1) + f, (float) (j + 1) + f, (float) (k + 1) + f);
+            List<LivingEntity> list = player.level.getEntities(EntityTypeTest.forClass(LivingEntity.class), box, ENTITY_PREDICATE);
+            for (LivingEntity e : list) {
+                if (e.getMaxHealth() > 30.0f) {//Since there are some mobs from these mods that aren't bosses, we don't need to worry about those. This is the minimum health a mob has to have to be considered a boss
+                    if (getMonsterName(e).contains("meetyourfight")){
+                        musicManager.stopPlaying();//meetyourfight works differently. we need to stop currently playing music so there's no music overlapping.
+                        return false;
+                    }
+                    if (getMonsterName(e).contains("witherstorm")
+                            || getMonsterName(e).contains("aquamirae")
+                            || getMonsterName(e).contains("mutantmore")
+                            || getMonsterName(e).contains("cataclysm")
+                    ) {
+                        return false;//If we are close to any enemies from the above mods, don't play any custom music
+                    }
+                }
+            }
+        }
+        return true;//If it reaches this point, then it's safe to play music
     }
 }

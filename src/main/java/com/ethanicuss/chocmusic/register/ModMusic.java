@@ -1,4 +1,4 @@
-package com.ethanicuss.merrymusic.register;
+package com.ethanicuss.chocmusic.register;
 
 import net.minecraft.sounds.Music;
 
